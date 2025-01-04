@@ -44,10 +44,17 @@ public class DefaultWorkerService implements WorkerService {
     }
 
     @Override
-    public void updateStatus(String id, Worker.RunningStatus status) {
+    public void enable(String id) {
         Worker worker = workerDao.findById(id);
         String context = Base64Decoder.decodeStr(worker.getContext());
         camelContextService.enable(id, context);
-        workerDao.update(worker.setStatus(status));
+        workerDao.update(worker.setStatus(Worker.RunningStatus.ENABLE));
+    }
+
+    @Override
+    public void disable(String id) {
+        Worker worker = workerDao.findById(id);
+        camelContextService.disable("route-2395");
+        workerDao.update(worker.setStatus(Worker.RunningStatus.DISABLE));
     }
 }

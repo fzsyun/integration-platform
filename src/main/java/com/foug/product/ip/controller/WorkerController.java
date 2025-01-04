@@ -40,11 +40,11 @@ public class WorkerController {
 
     @PutMapping("/enable/{id}")
     public void enable(@PathVariable String id) {
-        workerService.updateStatus(id, Worker.RunningStatus.ENABLE);
+        workerService.enable(id);
     }
 
     @PutMapping("/disable/{id}")
     public void disable(@PathVariable String id) {
-        workerService.updateStatus(id, Worker.RunningStatus.DISABLE);
+        workerService.disable(id);
     }
 }

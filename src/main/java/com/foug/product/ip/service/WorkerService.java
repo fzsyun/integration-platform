@@ -17,6 +17,8 @@ public interface WorkerService {
 
     void delete(String id);
 
-    void updateStatus(String id, Worker.RunningStatus status);
+    void enable(String id);
+
+    void disable(String id);
 
 }

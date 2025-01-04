@@ -1,10 +1,9 @@
 package com.foug.product.ip.service;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.Route;
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.Resource;
+import org.apache.camel.spring.boot.SpringBootCamelContext;
+import org.apache.camel.support.MessageHelper;
 import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.ResourceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +23,19 @@ public class CamelContextService {
         Resource resource = ResourceHelper.fromString("test.yaml", context);
         try {
             PluginHelper.getRoutesLoader(camelContext).loadRoutes(resource);
-            camelContext.start();
+                        camelContext.setMessageHistory(true);
+            //            camelContext.start();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void disable(String workerId) {
-        Route route = camelContext.getRoute(workerId);
-        route.getCamelContext().stop();
+        try {
+            ((SpringBootCamelContext) camelContext).stopRoute(workerId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
 }
