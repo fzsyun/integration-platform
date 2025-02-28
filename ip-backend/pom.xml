@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>top.foug.product.ip</groupId>
+    <artifactId>integration-platform</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>集成平台-顶层pom</name>
+    <modules>
+        <module>bootstrap</module>
+        <module>common</module>
+        <module>core</module>
+        <module>dao</module>
+        <module>exchange</module>
+        <module>service</module>
+        <module>task</module>
+        <module>web</module>
+    </modules>
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+        <maven-release-plugin.versinon>3.0.1</maven-release-plugin.versinon>
+        <project.encoding>UTF-8</project.encoding>
+        <!-- 发布用，与项目版本号操持一致 -->
+        <release.version>0.0.1-SNAPSHOT</release.version>
+        <all-in-one-release.version>1.0.27</all-in-one-release.version>
+        <apache.camel.version>4.9.0</apache.camel.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.izesion.architecture</groupId>
+                <artifactId>all-in-one</artifactId>
+                <version>${all-in-one-release.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-starter-parent</artifactId>
+                <version>${apache.camel.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>top.foug.product.ip</groupId>
+                <artifactId>common</artifactId>
+                <version>${release.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>top.foug.product.ip</groupId>
+                <artifactId>bootstrap</artifactId>
+                <version>${release.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>top.foug.product.ip</groupId>
+                <artifactId>dao</artifactId>
+                <version>${release.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>top.foug.product.ip</groupId>
+                <artifactId>service</artifactId>
+                <version>${release.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>top.foug.product.ip</groupId>
+                <artifactId>task</artifactId>
+                <version>${release.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>top.foug.product.ip</groupId>
+                <artifactId>web</artifactId>
+                <version>${release.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <parameters>true</parameters>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>3.2.5</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

@@ -1,0 +1,60 @@
+@startuml
+enum   WorkStatus {
+    RUNNING
+    STOPPED
+}
+
+enum VarType {
+    GLOBAL
+    LOCAL
+}
+
+entity Project{
+  String identify
+  String name
+  LocalDateTime created
+  LocalDateTime updated
+}
+
+entity  Worker {
+    String identify
+    String code
+    String name
+    String description
+    Text context
+    WorkStatus status
+    LocalDateTime created
+    LocalDateTime updated
+}
+
+entity  Variable {
+    String identify
+    String code
+    String workerId
+    String name
+    String key
+    String value
+    VarType type
+    LocalDateTime created
+    LocalDateTime updated
+}
+
+entity MessageLog {
+  String identify
+  String workerId
+  String messageId
+  String processId
+  Text in_header
+  Text in_body
+  Test out_header
+  Text out_body
+  LocalDateTime created
+}
+
+together {
+  entity Worker
+  entity MessageLog
+  entity Variable
+  entity Project
+}
+@enduml
